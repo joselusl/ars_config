@@ -191,7 +191,7 @@ Visualization Manager:
       Buffer Length: 1
       Class: rviz/Path
       Color: 239; 41; 41
-      Enabled: false
+      Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
@@ -209,7 +209,7 @@ Visualization Manager:
       Shaft Length: 0.10000000149011612
       Topic: /collis_free_robot_trajectory_ref
       Unreliable: false
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -247,7 +247,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 81.05294799804688
+      Scale: 55.23530960083008
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: 4.8819050788879395
