@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Tree1
+        - /Pose1
       Splitter Ratio: 0.41337907314300537
     Tree Height: 599
   - Class: rviz/Selection
@@ -58,6 +59,8 @@ Visualization Manager:
         All Enabled: true
         robot_base_link:
           Value: true
+        robot_estim_base_link:
+          Value: true
         world:
           Value: true
       Marker Alpha: 1
@@ -69,6 +72,8 @@ Visualization Manager:
       Tree:
         world:
           robot_base_link:
+            {}
+          robot_estim_base_link:
             {}
       Update Interval: 0
       Value: true
@@ -178,7 +183,7 @@ Visualization Manager:
       Marker Topic: /simulator/sim_environment/obstacles_static
       Name: MarkerArray
       Namespaces:
-        {}
+        static: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -186,7 +191,7 @@ Visualization Manager:
       Marker Topic: /simulator/sim_environment/obstacles_dynamic
       Name: MarkerArray
       Namespaces:
-        {}
+        dynamic: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -202,7 +207,8 @@ Visualization Manager:
       Marker Topic: /obstacles_detected_robot
       Name: MarkerArray
       Namespaces:
-        {}
+        dynamic: true
+        static: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -210,7 +216,7 @@ Visualization Manager:
       Marker Topic: /estim_map_world
       Name: MarkerArray
       Namespaces:
-        {}
+        estimated_map: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -238,11 +244,11 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Alpha: 1
-      Axes Length: 0.009999999776482582
+      Axes Length: 0.10000000149011612
       Axes Radius: 0.004999999888241291
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Pose
@@ -251,6 +257,17 @@ Visualization Manager:
       Shaft Radius: 0.05000000074505806
       Shape: Axes
       Topic: /meas_robot_pose
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Class: rviz/PointStamped
+      Color: 204; 41; 204
+      Enabled: true
+      History Length: 1
+      Name: PointStamped
+      Queue Size: 10
+      Radius: 0.05000000074505806
+      Topic: /meas_robot_position
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -285,8 +302,8 @@ Visualization Manager:
       Unreliable: false
       Value: false
     - Alpha: 1
-      Axes Length: 0.5
-      Axes Radius: 0.05000000074505806
+      Axes Length: 0.10000000149011612
+      Axes Radius: 0.004999999888241291
       Class: rviz/PoseWithCovariance
       Color: 255; 25; 0
       Covariance:
@@ -313,17 +330,6 @@ Visualization Manager:
       Shaft Radius: 0.05000000074505806
       Shape: Axes
       Topic: /estim_robot_pose_cov
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Class: rviz/PointStamped
-      Color: 204; 41; 204
-      Enabled: true
-      History Length: 1
-      Name: PointStamped
-      Queue Size: 10
-      Radius: 0.20000000298023224
-      Topic: /meas_robot_position
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -427,10 +433,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 311.6880187988281
+      Scale: 206.57591247558594
       Target Frame: <Fixed Frame>
-      X: -0.039900463074445724
-      Y: 0.034240636974573135
+      X: 1.3425410985946655
+      Y: -0.12512463331222534
     Saved: ~
 Window Geometry:
   Displays:
