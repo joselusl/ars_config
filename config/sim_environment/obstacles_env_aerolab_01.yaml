@@ -1,0 +1,14 @@
+static:
+- circles:
+    - position: [ 1.15, 2.0, 1.0 ]
+      sizes: [ 0.4, 0.4, 2.0 ]
+    - position: [ -1.25, 2.20, 1.0 ]
+      sizes: [ 0.4, 0.4, 2.0 ]
+    - position: [ 1.05, -1.8, 1.0 ]
+      sizes: [ 0.4, 0.4, 2.0 ]
+    - position: [ -1.0, -2.10, 1.0 ]
+      sizes: [ 0.3, 0.3, 2.0 ]
+dynamic:
+- circles: []
+
+

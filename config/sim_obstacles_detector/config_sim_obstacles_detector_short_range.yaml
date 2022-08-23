@@ -1,7 +1,7 @@
 sim_obstacles_detector:
   obstacle_detect_loop_freq: 10.0
   robot_frame: 'robot_base_link'
-  detector_range: 1.0
+  detector_range: 1.5
   cov_meas_pos:
     x: 0.0001
     y: 0.0001
