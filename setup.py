@@ -1,54 +1,63 @@
 from setuptools import find_packages, setup
 import os
-from glob import glob
-import fnmatch
-
 
 package_name = 'ars_config'
 
 
+def list_subfolders_and_files(package_name, file_dir):
+    result = []
 
-def get_data_files_type(package_name, file_dir, file_type='*'):
-    paths = []
-    for (path, directories, filenames) in os.walk(file_dir):
-        for filename in filenames:
-            if fnmatch.fnmatch(filename, file_type):
-                paths.append(os.path.join(path, filename))
-                #print(os.path.join(path, filename))
-    return paths
+    package_folder_share = os.path.join('share', package_name)
+    root_folder = os.path.join(file_dir)
+    
+    def scan_folder(folder):
+        files_in_folder = []
+        subfolders = []
 
-def get_data_files_type_tuple(package_name, file_dir, file_type='*'):
-    paths = []
-    for (path, directories, filenames) in os.walk(file_dir):
-        for filename in filenames:
-            if fnmatch.fnmatch(filename, file_type):
-                paths.append((os.path.join('share', package_name, file_dir), os.path.join(path, filename)))
-                #print(os.path.join(path, filename))
-    return paths
+        # Iterate over each item in the folder
+        for entry in os.scandir(folder):
+            if entry.is_file():
+                files_in_folder.append(entry.path)
+            elif entry.is_dir():
+                subfolders.append(entry.path)
+
+        # Convert the absolute folder path to a relative path
+        relative_folder_path = os.path.relpath(folder, root_folder)
+
+        # Exclude entries with empty file lists and entries for the root folder itself
+        if relative_folder_path != '.' and files_in_folder:
+            # Append a tuple of the relative folder path and the list of relative file paths to the result
+            result.append((os.path.join(package_folder_share,folder), files_in_folder))
+
+        # Recursively scan subfolders
+        for subfolder in subfolders:
+            scan_folder(subfolder)
+
+    # Start scanning from the root folder
+    scan_folder(root_folder)
+
+    return result
 
 
 
+data_files_list = [
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ]
 
-#print((os.path.join('share', package_name, 'config'), get_data_files_type(package_name, 'config', '*.rviz')))
+config_files = list_subfolders_and_files(package_name, 'config')
 
 
-#print(get_data_files_type('/home/joselusl/workspace/src/ars_project/config', 'config', '*.yaml'))
+data_files_list += config_files
+
+
 
 setup(
     name=package_name,
     version='0.0.1',
     packages=find_packages(exclude=['test']),
-    data_files=[
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
-        #(os.path.join('share', package_name, 'config'), (os.path.join('config', '*.[tra][ttp][cal]*'))),
-        (os.path.join('share', package_name, 'config'), get_data_files_type(package_name, 'config/', '*.rviz')),
-        #get_data_files_type_tuple(package_name, 'config', '*.rviz'),
-        #(os.path.join('share', package_name, 'config'), glob('config/**/*.rviz', recursive=True)),
-        #(os.path.join('share', package_name, 'config'), glob('config/*.rviz', recursive=True))
-        #(os.path.join('share', package_name, 'config'), (os.path.join('config', '*.yaml'))),
-     ],
+    data_files=data_files_list,
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='joselusl',
