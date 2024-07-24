@@ -41,15 +41,16 @@ def list_subfolders_and_files(package_name, file_dir):
 
 
 data_files_list = [
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ]
 
 config_files = list_subfolders_and_files(package_name, 'config')
+rviz_files = list_subfolders_and_files(package_name, 'rviz')
 
 
 data_files_list += config_files
+data_files_list += rviz_files
 
 
 
